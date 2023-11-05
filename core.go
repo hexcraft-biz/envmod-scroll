@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"os"
 
-	resph "github.com/hexcraft-biz/misc/resp"
+	"github.com/hexcraft-biz/her"
 	"github.com/hexcraft-biz/misc/xtime"
 )
 
@@ -19,10 +19,10 @@ type Scroll struct {
 	EndpointGetShortUrl *url.URL
 }
 
-func New() (*Scroll, *resph.Resp) {
+func New() (*Scroll, *her.Error) {
 	u, err := url.ParseRequestURI(os.Getenv("HOST_SCROLL"))
 	if err != nil {
-		return nil, resph.NewError(http.StatusInternalServerError, err, nil)
+		return nil, her.NewError(http.StatusInternalServerError, err, nil)
 	}
 
 	return &Scroll{
@@ -48,7 +48,7 @@ type Request struct {
 	*http.Request
 }
 
-func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Time, duration int) (*Request, *resph.Resp) {
+func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Time, duration int) (*Request, *her.Error) {
 	input := &inputGetShortUrl{
 		RedirectUri: redirectUri.String(),
 		StartedAt:   startedAt,
@@ -60,29 +60,29 @@ func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Tim
 
 	jsonbytes, err := json.Marshal(input)
 	if err != nil {
-		return nil, resph.NewError(http.StatusInternalServerError, err, nil)
+		return nil, her.NewError(http.StatusInternalServerError, err, nil)
 	}
 
 	req, err := http.NewRequest("POST", e.EndpointGetShortUrl.String(), bytes.NewReader(jsonbytes))
 	if err != nil {
-		return nil, resph.NewError(http.StatusInternalServerError, err, nil)
+		return nil, her.NewError(http.StatusInternalServerError, err, nil)
 	}
 
 	return &Request{Request: req}, nil
 }
 
-func (r Request) Do() (string, *resph.Resp) {
+func (r Request) Do() (string, *her.Error) {
 	client := &http.Client{}
 	result := new(struct {
 		Url string `json:"url"`
 	})
-	payload := resph.NewPayload(result)
+	payload := her.NewPayload(result)
 	if resp, err := client.Do(r.Request); err != nil {
-		return "", resph.NewError(http.StatusInternalServerError, err, nil)
-	} else if err := resph.FetchHexcApiResult(resp, payload); err != nil {
+		return "", her.NewError(http.StatusInternalServerError, err, nil)
+	} else if err := her.FetchHexcApiResult(resp, payload); err != nil {
 		return "", err
 	} else if resp.StatusCode >= 400 {
-		return "", resph.NewErrorWithMessage(http.StatusInternalServerError, payload.Message, nil)
+		return "", her.NewErrorWithMessage(http.StatusInternalServerError, payload.Message, nil)
 	} else {
 		return result.Url, nil
 	}
