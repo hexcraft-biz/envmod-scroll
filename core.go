@@ -19,7 +19,7 @@ type Scroll struct {
 	EndpointGetShortUrl *url.URL
 }
 
-func New() (*Scroll, *her.Error) {
+func New() (*Scroll, her.Error) {
 	u, err := url.ParseRequestURI(os.Getenv("HOST_SCROLL"))
 	if err != nil {
 		return nil, her.NewError(http.StatusInternalServerError, err, nil)
@@ -48,7 +48,7 @@ type Request struct {
 	*http.Request
 }
 
-func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Time, duration int) (*Request, *her.Error) {
+func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Time, duration int) (*Request, her.Error) {
 	input := &inputGetShortUrl{
 		RedirectUri: redirectUri.String(),
 		StartedAt:   startedAt,
@@ -71,7 +71,7 @@ func (e Scroll) NewRequestGetShortUrl(redirectUri *url.URL, startedAt *xtime.Tim
 	return &Request{Request: req}, nil
 }
 
-func (r Request) Do() (string, *her.Error) {
+func (r Request) Do() (string, her.Error) {
 	client := &http.Client{}
 	result := new(struct {
 		Url string `json:"url"`
