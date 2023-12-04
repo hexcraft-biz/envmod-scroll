@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/hexcraft-biz/her"
-	"github.com/hexcraft-biz/misc/xtime"
+	"github.com/hexcraft-biz/xtime"
 )
 
 // ================================================================

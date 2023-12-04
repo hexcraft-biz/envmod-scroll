@@ -1,8 +1,4 @@
-github.com/hexcraft-biz/her v0.0.2 h1:/tm3zmtAoIerVwSb/Jkc5aFZuMoEWli7YfmYKf3wgqE=
-github.com/hexcraft-biz/her v0.0.2/go.mod h1:g7jcBefsWaWBmhFzfeO0m8GsnrJQOEkFHS/SeiMTM+Y=
-github.com/hexcraft-biz/her v0.0.4 h1:ajDIMCoUkcNN9J8CxGM1w1MT2g3yEaT9UTtdTiy6vpQ=
-github.com/hexcraft-biz/her v0.0.4/go.mod h1:g7jcBefsWaWBmhFzfeO0m8GsnrJQOEkFHS/SeiMTM+Y=
 github.com/hexcraft-biz/her v0.0.5 h1:HWmLtFxnKp9YVNQJiCnVGGG8yUdurFEjveYILGys9WY=
 github.com/hexcraft-biz/her v0.0.5/go.mod h1:g7jcBefsWaWBmhFzfeO0m8GsnrJQOEkFHS/SeiMTM+Y=
-github.com/hexcraft-biz/misc/xtime v0.0.0-20231104233355-a4e83e481e2b h1:hn0OsOyn3P2EYcBzj7EbzSqBJazbvxk5xJ/4lGfv5xI=
-github.com/hexcraft-biz/misc/xtime v0.0.0-20231104233355-a4e83e481e2b/go.mod h1:LDVrHyp0q1hbZNdLp31lP13REs0CyHc4MHq3jr67NxY=
+github.com/hexcraft-biz/xtime v0.0.3 h1:hq6u++YQVl8G9W8aMAFVsfTERayvKSV4KrZSOH8TL2o=
+github.com/hexcraft-biz/xtime v0.0.3/go.mod h1:sfoKKcRT7bgGBkKBMK3guIXkjwzXg52xmhswNa8mak8=
