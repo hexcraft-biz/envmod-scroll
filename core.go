@@ -15,7 +15,7 @@ import (
 // Short link service
 // ================================================================
 type Scroll struct {
-	AppRoot             string
+	RootUrl             string
 	EndpointGetShortUrl *url.URL
 }
 
@@ -26,7 +26,7 @@ func New() (*Scroll, her.Error) {
 	}
 
 	return &Scroll{
-		AppRoot:             u.String(),
+		RootUrl:             u.String(),
 		EndpointGetShortUrl: u.JoinPath("/links/v1/urls"),
 	}, nil
 }
