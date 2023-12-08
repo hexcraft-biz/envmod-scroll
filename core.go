@@ -15,18 +15,18 @@ import (
 // Short link service
 // ================================================================
 type Scroll struct {
-	Host                string
+	AppRoot             string
 	EndpointGetShortUrl *url.URL
 }
 
 func New() (*Scroll, her.Error) {
-	u, err := url.ParseRequestURI(os.Getenv("HOST_SCROLL"))
+	u, err := url.ParseRequestURI(os.Getenv("APP_SCROLL"))
 	if err != nil {
 		return nil, her.NewError(http.StatusInternalServerError, err, nil)
 	}
 
 	return &Scroll{
-		Host:                u.String(),
+		AppRoot:             u.String(),
 		EndpointGetShortUrl: u.JoinPath("/links/v1/urls"),
 	}, nil
 }
